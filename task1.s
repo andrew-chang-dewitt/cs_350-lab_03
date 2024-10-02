@@ -22,9 +22,9 @@ A:	.word 2, -1, 3, 8, 10, 5, 4, 23, -20, 6
 	# TODO: add test cases from assignment here
 	.text
 main: 	# max_last(A) is
-	#   input: 	 A <- 	unordered array of unsigned ints
-	# 			in terms of a_i s.t. i is in [0..9]
-	#   output: 	 None
+	#   input:       A <- unordered array of unsigned ints
+	#                     in terms of a_i s.t. i is in [0..9]
+	#   output:      None
 	#   side-effect: swap last term in A w/ max term in A
 	# n  <- length of A, 10
 	# &A <- pointer to A[0]
