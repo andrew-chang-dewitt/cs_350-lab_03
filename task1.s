@@ -13,7 +13,8 @@ main: 	# max_last(A) is
 	# ma <- max value, init as a_0
 	# mi <- max index, init as 0
 	# i  <- temp value track current loop iteration (1..n-1), init @ 1
-	# loop from i=1 to n-1: # skip first value as it's already stored in max
+	# skip first value as it's already stored in max
+	# loop from i=1 to n-1: 
 	#   if mv < a_i:
 	#     mv <- a_i
 	#     mi <- i
