@@ -14,14 +14,20 @@ main: 	# max_last(A) is
 	# mi <- max index, init as 0
 	# i  <- temp value track current loop iteration (1..n-1), init @ 1
 	# skip first value as it's already stored in max
-	# loop from i=1 to n-1: 
+	# loop from i to n-1: 
 	#   if mv < a_i:
 	#     mv <- a_i
 	#     mi <- i
 	# end loop
 	# swap a_n-1 & a_mi
 
-	# TODO: write print array pseudocode here
+	# i <- 0 reset loop counter
+  # print every array
+  # loop from i to n-1:
+	#   arg? <- val in a_i
+  #   arg? <- print code
+  #   exec print
+  # end loop
 
 exit:
 	addi a0, x0, 10		# set up exit call
