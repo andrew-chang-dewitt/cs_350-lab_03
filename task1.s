@@ -1,8 +1,26 @@
 	.data
-	# A => 465
-A:	.word 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 ,13 ,14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30
+A:	.word 2, -1, 3, 8, 10, 5, 4, 23, -20, 6
+	# max_last(A) => mutate A to be 2, -1, 3, 8, 10, 5, 4, -20, 6, 23
+	# TODO: add test cases from assignment here
 	.text
-main:
+main: 	# max_last(A) is
+	#   input: 	 A <- 	unordered array of unsigned ints
+	# 			in terms of a_i s.t. i is in [0..9]
+	#   output: 	 None
+	#   side-effect: swap last term in A w/ max term in A
+	# n  <- length of A, 10
+	# &A <- pointer to A[0]
+	# ma <- max value, init as a_0
+	# mi <- max index, init as 0
+	# i  <- temp value track current loop iteration (1..n-1), init @ 1
+	# loop from i=1 to n-1: # skip first value as it's already stored in max
+	#   if mv < a_i:
+	#     mv <- a_i
+	#     mi <- i
+	# end loop
+	# swap a_n-1 & a_mi
+
+	# TODO: write print array pseudocode here
 
 exit:
 	addi a0, x0, 10		# set up exit call
