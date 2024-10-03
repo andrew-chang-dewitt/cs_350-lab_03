@@ -52,9 +52,10 @@ A:	.word 2, -1, 3, 8, 10, 5, 4, 23, -20, 6
 #	# end loop
 
 main:
-exit:
-	addi a0, x0, 1		# set up print call
-	addi a1, x0, 0		# place result in a1
+printResult:
+	addi a7, x0, 1		# set up print call
+	addi a1, x0, 42		# place result in a1
 	ecall
-	addi a0, x0, 10		# set up exit call
+exit:
+	addi a7, x0, 10		# set up exit call
 	ecall			# exit
