@@ -27,7 +27,7 @@ main:	# # max_last(A) is
 	# #                     in terms of a_i s.t. i is in [0..9]
 	# #   output:      None
 	# #   side-effect: swap last term in A w/ max term in A
-	li s0 40        # n  <- length of A in bytes, 10 * 4
+	li s0 36        # n - 1 <- length of A in bytes, (10 - 1) * 4
 	la s1 A         # &A <- pointer to A[0]
 	la s2 comma    # &A <- pointer to A[0]
 	# lw a0 0(s1)   # mv <- max value, init as a0
@@ -56,11 +56,11 @@ print:	# print every array entry
 	ecall           #   exec print
 	# FIXME: somehow we're printing 12 elements instead of 10?
 	#        check math on incrementing i, maybe add a print statement for it
+	addi t4 t4 4    # i += 4 to increment by word
 	blt s0 t4 exit  # check if loop keeps printing, if so:
 	add a0 s2 x0    # print array item delimiter
 	li a7 4
 	ecall
-	addi t4 t4 4    # i += 4 to increment by word
 	j print         # and go again
 
 exit:
