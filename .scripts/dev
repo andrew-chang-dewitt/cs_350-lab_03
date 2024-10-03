@@ -1,3 +1,4 @@
 #! /bin/bash
 
-
+# run task1 in project mode (including all other sibling files)
+rars task1/main.s p $@
