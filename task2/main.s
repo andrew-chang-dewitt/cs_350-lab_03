@@ -56,17 +56,19 @@ nline:  .string "\n"
 	.text
 
 main:
-	la a0 A         # &A <- pointer to A[0]
-	la t0 x         # &x
-	lw a1 0(t0)     # x <- *t0
-	la a2 B         # &B <- pointer to B[0]
-	la t0 y         # &y
-	lw a3 0(t0)     # y <- *t0
+	# load A & B into position for sum_arr(...)
+	la a0 A          # &A <- pointer to A[0]
+	la t0 x          # &x
+	lw a1 0(t0)      # x <- *t0
+	la a2 B          # &B <- pointer to B[0]
+	la t0 y          # &y
+	lw a3 0(t0)      # y <- *t0
 	jal ra sum_arr
-	la a0 C         # &C <- pointer to C[0]
-	la t0 z         # &z
-	lw a1 0(t0)     # z <- *t0
-	jal ra print_arr
+
+	# C already in position from sum_arr return for printing results
+	# FIXME: uncomment next line when sum_arr is done
+	# jal ra print_arr
+
 	j exit
 # END main
 
@@ -83,11 +85,39 @@ sum_arr:
 	sw ra 0(sp)
 
 	# BODY:
-	jal ra print_arr  # print A (ptr in a0 & len in a1 already)
-	add a0 a2 x0      # print B start by setting up args
-	add a1 a3 x0
-	jal ra print_arr
+	# is a or b longer?
+	# t0 <- ptr for indexing longer array
+	# t1 <- ptr for indexing shorter (or equal) array
+	# t2 <- ptr for indexing result array
+	# t3 <- t0 + shorter distance
+	# t4 <- t0 + longer distance
 
+	# set up sum loop
+	# max addr <- t0 + 4* shorter length
+sa_sum_loop:
+	# t5 <- load t0
+	# t6 <- load t1
+	# t7 <- t5 + t6
+	# mem@t2 <- t7
+	# t0 + 4
+	# t1 + 4
+	# t2 + 4
+	# if t3 < t0, goto rest loop
+	# else, go again
+
+	# set up rest loop
+sa_rst_loop:
+	# t5 <- load t0
+	# mem@t2 <- t5
+	# t0 + 4
+	# t2 + 4
+	# if t4 < t0, goto exit
+	# else, go again
+
+
+sa_exit:
+	# a0 <- ptr to result array
+	# a1 <- value of result array length
 	# TEARDOWN:
 	lw ra 0(sp)
 	addi sp sp 4      # pop return addr from stack
@@ -101,10 +131,6 @@ print_arr:
 	#         a1: n <- length of A
 	# output: none
 	# side effect: print every array entry to stdout
-	# SETUP:
-	addi sp sp -4     # push return addr to stack
-	sw ra 0(sp)
-
 	# BODY:
 	# prepare to print results
 	la t2 comma       # ptr to array element delimiter
@@ -115,7 +141,7 @@ print_arr:
 	add t0 a0 x0      # i <- a_0 addr
 	# print results in loop
 pa_loop:
-			  # loop from i to n-1:
+                          # loop from i to n-1:
 	lw a0 0(t0)       # printing int value in each a_i
 	addi a7 x0 1
 	ecall
@@ -126,18 +152,15 @@ pa_loop:
 	ecall
 	j pa_loop
 	# exit loop
-pa_exit: 
+pa_exit:
 	add a0 t3 x0      # print newline for readability
 	addi a7 x0 4
 	ecall
 
 	# TEARDOWN:
-	lw ra 0(sp)
-	addi sp sp 4      # pop return addr from stack
-	jr ra
 	jr ra
 # END print_arr
 
 exit:
-	addi a7, x0, 10		# set up exit call
-	ecall			# exit
+	addi a7, x0, 10	  # set up exit call
+	ecall             # exit
