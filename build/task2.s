@@ -157,19 +157,19 @@ print_arr:
 
 pa_loop:
                           # loop from i to n-1:
-	lw a0 0(t0)       # printing int value in each a_i
-	addi a7 x0 1
+	lw a1 0(t0)       # printing int value in each a_i
+	addi a0 x0 1
 	ecall
 	addi t0 t0 4      # i += 4 to increment by word
 	blt t1 t0 pa_exit # if i < n, loop again, else goto exit
-	add a0 t2 x0      # print comma & space
-	li a7 4
+	add a1 t2 x0      # print comma & space
+	li a0 4
 	ecall
 	j pa_loop
 	# exit loop
 pa_exit:
-	add a0 t3 x0      # print newline for readability
-	addi a7 x0 4
+	add a1 t3 x0      # print newline for readability
+	addi a0 x0 4
 	ecall
 
 	# TEARDOWN:
@@ -177,5 +177,5 @@ pa_exit:
 # END print_arr
 
 exit:
-	addi a7, x0, 10	  # set up exit call
+	addi a0, x0, 10	  # set up exit call
 	ecall             # exit
