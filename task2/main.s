@@ -85,15 +85,25 @@ sum_arr:
 	sw ra 0(sp)
 
 	# BODY:
-	# is a or b longer?
-	# t0 <- ptr for indexing longer array
-	# t1 <- ptr for indexing shorter (or equal) array
-	# t2 <- ptr for indexing result array
-	# t3 <- t0 + shorter distance
-	# t4 <- t0 + longer distance
+	bge a3 a1 sa_b_ge # is a or b longer?
+	add t0 a0 x0 # t0 <- ptr for indexing longer array
+	add t1 a2 x0 # t1 <- ptr for indexing shorter (or equal) array
+	la t2 C # t2 <- ptr for indexing result array
+	slli a1 a1 2
+	add t3 a1 t0 # t3 <- t0 + longer distance
+	slli a3 a3 2
+	add t4 a3 t0 # t4 <- t0 + shorter distance
+	j sa_sum_loop
 
-	# set up sum loop
-	# max addr <- t0 + 4* shorter length
+sa_b_ge:
+	add t0 a2 x0 # t0 <- ptr for indexing longer array
+	add t1 a0 x0 # t1 <- ptr for indexing shorter (or equal) array
+	la t2 C # t2 <- ptr for indexing result array
+	slli a3 a3 2
+	add t3 a3 t0 # t3 <- t0 + longer distance
+	slli a1 a1 2
+	add t4 a1 t0 # t4 <- t0 + shorter distance
+
 sa_sum_loop:
 	# t5 <- load t0
 	# t6 <- load t1
