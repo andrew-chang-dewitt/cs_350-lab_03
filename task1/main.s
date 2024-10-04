@@ -15,12 +15,18 @@
 ## to A. Please save the screenshot of the two
 ## following test cases:
 ## 1. A=(7,12,3,6,23,90,-2,-122,10,1)
+##    max_last(A) => A=(7,12,3,6,23,-2,-122,10,1,90)
 ## 2. A=(1205,5523,703,66,-324,0,-9,80,5048,990)
+##    max_last(A) => A=(1205,703,66,-324,0,-9,80,5048,990,5523)
 	.data
 A:	.word 2, -1, 3, 8, 10, 5, 4, 23, -20, 6
+	# max_last(A) => mutate A to be (2, -1, 3, 8, 10, 5, 4, -20, 6, 23)
+	# test cases from prompt:
+# A:	.word 7, 12, 3, 6, 23, 90, -2, -122, 10, 1
+	# max_last(A) => A=(7, 12, 3, 6, 23, -2, -122, 10, 1, 90)
+# A:	.word 1205, 5523, 703, 66, -324, 0, -9, 80, 5048, 990
+	# max_last(A) => A=(1205, 703, 66, -324, 0, -9, 80, 5048, 990, 5523)
 comma:  .string ", "
-	# max_last(A) => mutate A to be 2, -1, 3, 8, 10, 5, 4, -20, 6, 23
-	# TODO: add test cases from assignment here
 
 	.text
 
