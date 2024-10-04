@@ -30,19 +30,19 @@
 	.data
 	# Example: A=(2, 4, 6), B=(1,3)
 	#    sum_arr(A, B, x, y) => C=(3,7,6)
-A:	.word 2, 4, 6
-B:	.word 1, 3
-x:	.word 3
-y:	.word 2
-C:	.word 0, 0, 0 # init C as empty
+# A:	.word 2, 4, 6
+# B:	.word 1, 3
+# x:	.word 3
+# y:	.word 2
+# C:	.word 0, 0, 0 # init C as empty
 	# test cases from prompt:
 	# 1) A=(10,20,30,40), B=(90,80,70,60,50)
 	#    sum_arr(A, B, x, y) => C=(100, 100, 100, 100, 50)
-# A:	.word 10, 20, 30, 40
-# B:	.word 90, 80, 70, 60, 50
-# x:	.word 4
-# y:	.word 5
-# C:	.word 0, 0, 0, 0, 0 # init C as empty
+A:	.word 10, 20, 30, 40
+B:	.word 90, 80, 70, 60, 50
+x:	.word 4
+y:	.word 5
+C:	.word 0, 0, 0, 0, 0 # init C as empty
 	# 2) A=(3,2,1,0,1,2,3), B=(7,8,9,10,9,8,7)
 	#    sum_arr(A, B, x, y) => C=(10,10,10,10,10,10,10)
 # A:	.word 3, 2, 1, 0, 1, 2, 3
@@ -50,12 +50,12 @@ C:	.word 0, 0, 0 # init C as empty
 # x:	.word 7
 # y:	.word 7
 # C:	.word 0, 0, 0, 0, 0, 0, 0 # init C as empty
+
 comma:  .string ", "
 colon:  .string ": "
 nline:  .string "\n"
 
 	.text
-
 main:
 	# load A & B into position for sum_arr(...)
 	la a0 A          # &A <- pointer to A[0]
