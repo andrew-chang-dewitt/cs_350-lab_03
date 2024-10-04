@@ -72,14 +72,14 @@ main:
 	j exit
 # END main
 
+# BEGIN sum_arr(A, x, B, y) is
+# input:  a0: A <- ptr to unordered array of unsigned ints
+#         a1: x <- length of A
+#         a2: B <- ptr to unordered array of unsigned ints
+#         a3: y <- length of B
+# output: a0: C <- ptr to array of sums
+#         a1: z <- int repr length of array
 sum_arr:
-	# sum_arr(A, x, B, y) is
-	# input:  a0: A <- ptr to unordered array of unsigned ints
-	#         a1: x <- length of A
-	#         a2: B <- ptr to unordered array of unsigned ints
-	#         a3: y <- length of B
-	# output: a0: C <- ptr to array of sums
-	#         a1: z <- int repr length of array
 	# SETUP:
 	addi sp sp -4     # push return addr to stack
 	sw ra 0(sp)
@@ -125,14 +125,14 @@ sa_exit:
 # END sum_arr
 
 
+# BEGIN print_arr(A, n) is
+# input:  a0: A <- ptr to unordered array of unsigned ints
+#         a1: n <- length of A
+# output: none
+# side effect: print every array entry to stdout
+# BODY:
+# prepare to print results
 print_arr:
-	# print_arr(A, n) is
-	# input:  a0: A <- ptr to unordered array of unsigned ints
-	#         a1: n <- length of A
-	# output: none
-	# side effect: print every array entry to stdout
-	# BODY:
-	# prepare to print results
 	la t2 comma       # ptr to array element delimiter
 	la t3 nline       # ptr to newline char
 	slli a1 a1 2      # multiply length by 4 to get as words
